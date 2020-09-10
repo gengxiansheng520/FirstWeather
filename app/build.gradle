@@ -36,6 +36,8 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
 
+    //抽屉和刷新
+    implementation "androidx.drawerlayout:drawerlayout:1.1.0"
     implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0"
     //网络请求
     implementation 'com.squareup.retrofit2:retrofit:2.8.1'
@@ -58,4 +60,7 @@ dependencies {
 
     // optional - RxJava support for Room
     implementation "androidx.room:room-rxjava2:$room_version"
+
+    implementation 'androidx.navigation:navigation-fragment:2.3.0'
+    implementation 'androidx.navigation:navigation-ui:2.3.0'
 }

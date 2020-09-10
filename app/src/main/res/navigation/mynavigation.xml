@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mynavigation"
+    tools:ignore="UnusedNavigation"
+    app:startDestination="@id/chooseFragment">
+
+    <fragment
+        android:id="@+id/chooseFragment"
+        android:name="com.example.firstweather.ui.chooseProvince.chooseFragment"
+        android:label="chooseFragment" >
+        <action
+            android:id="@+id/action_chooseFragment_to_cityFragment"
+            app:destination="@id/cityFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/cityFragment"
+        android:name="com.example.firstweather.ui.chooseCity.CityFragment"
+        android:label="CityFragment" >
+        <action
+            android:id="@+id/action_cityFragment_to_countyFragment"
+            app:destination="@id/countyFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/countyFragment"
+        android:name="com.example.firstweather.ui.chooseCounty.CountyFragment"
+        android:label="CountyFragment" />
+</navigation>

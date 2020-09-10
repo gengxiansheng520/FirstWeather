@@ -1,11 +1,14 @@
 package com.example.firstweather.db.model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
 @Entity(tableName = "county_table")
-public class County {
+public class County implements Parcelable {
     @PrimaryKey(autoGenerate = true)
     private int autoId;
     @ColumnInfo
@@ -25,6 +28,16 @@ public class County {
 
     public int getAutoId() {
         return autoId;
+    }
+
+    @Override
+    public String toString() {
+        return "County{" +
+                "name='" + name + '\'' +
+                ", id=" + id +
+                ", weather_id='" + weather_id + '\'' +
+                ", city_id=" + city_id +
+                '}';
     }
 
     public void setAutoId(int autoId) {
@@ -61,5 +74,15 @@ public class County {
 
     public void setCity_id(int city_id) {
         this.city_id = city_id;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+
     }
 }

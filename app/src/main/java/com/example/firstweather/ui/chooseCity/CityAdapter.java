@@ -1,10 +1,9 @@
-package com.example.firstweather.ui.chooseArea;
+package com.example.firstweather.ui.chooseCity;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.DiffUtil;
@@ -12,9 +11,9 @@ import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.firstweather.R;
-import com.example.firstweather.db.model.Province;
+import com.example.firstweather.db.model.City;
 
-public class ProvinceAdapter extends ListAdapter<Province,ProvinceAdapter.ProvinceViewHolder> {
+public class CityAdapter extends ListAdapter<City, CityAdapter.CityViewHolder> {
 
     private OnItemClick onItemClick;
 
@@ -22,15 +21,15 @@ public class ProvinceAdapter extends ListAdapter<Province,ProvinceAdapter.Provin
         this.onItemClick = onItemClick;
     }
 
-    protected ProvinceAdapter() {
-        super(new DiffUtil.ItemCallback<Province>() {
+    protected CityAdapter() {
+        super(new DiffUtil.ItemCallback<City>() {
             @Override
-            public boolean areItemsTheSame(@NonNull Province oldItem, @NonNull Province newItem) {
+            public boolean areItemsTheSame(@NonNull City oldItem, @NonNull City newItem) {
                 return false;
             }
 
             @Override
-            public boolean areContentsTheSame(@NonNull Province oldItem, @NonNull Province newItem) {
+            public boolean areContentsTheSame(@NonNull City oldItem, @NonNull City newItem) {
                 return false;
             }
         });
@@ -38,40 +37,34 @@ public class ProvinceAdapter extends ListAdapter<Province,ProvinceAdapter.Provin
 
     @NonNull
     @Override
-    public ProvinceViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public CityViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         View view = inflater.inflate(R.layout.fragment_item,parent,false);
-        ProvinceViewHolder holder = new ProvinceViewHolder(view);
+        CityViewHolder holder = new CityViewHolder(view);
         holder.itemView.setOnClickListener(view1 -> {
             int position = holder.getAdapterPosition();
-            Province province = getItem(position);
+            City city =getItem(position);
             if (onItemClick != null) {
-                onItemClick.click(province);
+                onItemClick.click(city);
             }
         });
         return holder;
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ProvinceViewHolder holder, int position) {
-        Province province = getItem(position);
-        holder.textView.setText(province.getName());
+    public void onBindViewHolder(@NonNull CityViewHolder holder, int position) {
+        City city = getItem(position);
+        holder.textView.setText(city.getName());
     }
 
-    @Override
-    public int getItemViewType(int position) {
-        return super.getItemViewType(position);
-    }
-
-    static class ProvinceViewHolder extends RecyclerView.ViewHolder {
+    class CityViewHolder extends RecyclerView.ViewHolder {
         TextView textView;
-        private ProvinceViewHolder(@NonNull View itemView) {
+        public CityViewHolder(@NonNull View itemView) {
             super(itemView);
             textView = itemView.findViewById(R.id.textView);
         }
     }
     public interface OnItemClick {
-        void click (Province province);
+        void click(City city);
     }
-
 }

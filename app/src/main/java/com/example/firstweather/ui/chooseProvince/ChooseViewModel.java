@@ -1,4 +1,4 @@
-package com.example.firstweather.ui.chooseArea;
+package com.example.firstweather.ui.chooseProvince;
 
 import android.app.Application;
 
@@ -18,13 +18,38 @@ import io.reactivex.Observable;
 public class ChooseViewModel extends AndroidViewModel {
 
     private Repository repository;
+    private Province province;
+    private City city;
+    private County county;
 
     public ChooseViewModel(@NonNull Application application) {
         super(application);
         repository = new Repository(application.getApplicationContext());
     }
 
+    public Province getProvince() {
+        return province;
+    }
 
+    public void setProvince(Province province) {
+        this.province = province;
+    }
+
+    public City getCity() {
+        return city;
+    }
+
+    public void setCity(City city) {
+        this.city = city;
+    }
+
+    public County getCounty() {
+        return county;
+    }
+
+    public void setCounty(County county) {
+        this.county = county;
+    }
 
     //从数据库获得数据
     public LiveData<List<Province>> getDatabaseProvince() {
