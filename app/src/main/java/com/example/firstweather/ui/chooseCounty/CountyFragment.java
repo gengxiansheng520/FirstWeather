@@ -43,6 +43,7 @@ public class CountyFragment extends Fragment {
     private CountyAdapter countyAdapter;
     private List<County> countyList;
     private CompositeDisposable compositeDisposable;
+    private NavController controller;
     private static final String TAG = "CountyFragment";
 
     @Override
@@ -63,7 +64,7 @@ public class CountyFragment extends Fragment {
         binding.backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                NavController controller = Navigation.findNavController(requireActivity(),R.id.fragment);
+                controller = Navigation.findNavController(requireActivity(),R.id.fragment);
                 controller.navigate(R.id.cityFragment);
             }
         });
@@ -71,8 +72,6 @@ public class CountyFragment extends Fragment {
         countyAdapter.setOnItemClick(county -> {
             if (getActivity() instanceof MainActivity) {
                 Intent intent = new Intent(requireActivity(),WeatherActivity.class);
-                Toast.makeText(requireActivity(), "今天是个好日子"+county.toString(), Toast.LENGTH_SHORT).show();
-                Log.d(TAG, "onActivityCreated: "+county.toString());
                 intent.putExtra("county",county);
                 startActivity(intent);
                 requireActivity().finish();
@@ -80,6 +79,7 @@ public class CountyFragment extends Fragment {
                 WeatherActivity activity = (WeatherActivity) getActivity();
                 activity.binding.drawerLayout.closeDrawers();
                 activity.binding.swipeRefresh.setRefreshing(true);
+                chooseViewModel.setCounty(county);
                 activity.requestWeather(county);
             }
         });

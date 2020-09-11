@@ -26,6 +26,26 @@ public class County implements Parcelable {
         this.weather_id = weather_id;
     }
 
+    protected County(Parcel in) {
+        autoId = in.readInt();
+        name = in.readString();
+        id = in.readInt();
+        weather_id = in.readString();
+        city_id = in.readInt();
+    }
+
+    public static final Creator<County> CREATOR = new Creator<County>() {
+        @Override
+        public County createFromParcel(Parcel in) {
+            return new County(in);
+        }
+
+        @Override
+        public County[] newArray(int size) {
+            return new County[size];
+        }
+    };
+
     public int getAutoId() {
         return autoId;
     }
@@ -83,6 +103,10 @@ public class County implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel parcel, int i) {
-
+        parcel.writeInt(autoId);
+        parcel.writeString(name);
+        parcel.writeInt(id);
+        parcel.writeString(weather_id);
+        parcel.writeInt(city_id);
     }
 }

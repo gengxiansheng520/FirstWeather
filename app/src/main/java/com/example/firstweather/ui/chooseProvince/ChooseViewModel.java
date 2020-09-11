@@ -9,11 +9,13 @@ import androidx.lifecycle.LiveData;
 import com.example.firstweather.db.Repository;
 import com.example.firstweather.db.model.City;
 import com.example.firstweather.db.model.County;
+import com.example.firstweather.db.model.HeWeather;
 import com.example.firstweather.db.model.Province;
 
 import java.util.List;
 
 import io.reactivex.Observable;
+import okhttp3.ResponseBody;
 
 public class ChooseViewModel extends AndroidViewModel {
 
@@ -70,6 +72,12 @@ public class ChooseViewModel extends AndroidViewModel {
     }
     public Observable<List<County>> getServiceCounty(String provinceId, String cityId) {
         return repository.getServiceCounty(provinceId, cityId);
+    }
+    public Observable<HeWeather> getWeather(String weatherId) {
+        return repository.getWeather(weatherId);
+    }
+    public Observable<ResponseBody> getPic(String url) {
+        return repository.getPic(url);
     }
 
     //向数据库插入数据

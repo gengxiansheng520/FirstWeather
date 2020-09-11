@@ -7,6 +7,7 @@ import androidx.lifecycle.LiveData;
 import com.example.firstweather.db.dao.DAOUtil;
 import com.example.firstweather.db.model.City;
 import com.example.firstweather.db.model.County;
+import com.example.firstweather.db.model.HeWeather;
 import com.example.firstweather.db.model.Province;
 import com.example.firstweather.db.shp.SHPUtil;
 import com.example.firstweather.http.HttpUtil;
@@ -14,6 +15,7 @@ import com.example.firstweather.http.HttpUtil;
 import java.util.List;
 
 import io.reactivex.Observable;
+import okhttp3.ResponseBody;
 
 public class Repository {
     private DAOUtil daoUtil;
@@ -80,5 +82,10 @@ public class Repository {
     public Observable<List<County>> getServiceCounty(String provinceId, String cityId) {
         return httpUtil.getCounty(provinceId, cityId);
     }
-
+    public Observable<HeWeather> getWeather(String weatherId) {
+        return httpUtil.getWeather(weatherId);
+    }
+    public Observable<ResponseBody> getPic(String url) {
+        return httpUtil.getPic(url);
+    }
 }

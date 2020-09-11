@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.annotation.NavigationRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -21,8 +22,10 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
 import com.example.firstweather.R;
+import com.example.firstweather.databinding.FragmentChooseAreaBinding;
 import com.example.firstweather.databinding.FragmentProvinceBinding;
 import com.example.firstweather.db.model.Province;
+import com.example.firstweather.ui.BlankFragment;
 import com.example.firstweather.ui.chooseCity.CityFragment;
 
 import java.util.List;
@@ -34,10 +37,12 @@ import io.reactivex.schedulers.Schedulers;
 
 public class chooseFragment extends Fragment {
 
+
     private FragmentProvinceBinding binding;
     private ChooseViewModel chooseViewModel;
     private ProvinceAdapter provinceAdapter;
     private CompositeDisposable compositeDisposable;
+    private NavController controller;
     private static final String TAG = "chooseFragment";
 
 
@@ -68,7 +73,7 @@ public class chooseFragment extends Fragment {
         provinceAdapter.setOnItemClick(province->{
             Log.d(TAG, "onActivityCreated: "+ province.toString());
             chooseViewModel.setProvince(province);
-            NavController controller = Navigation.findNavController(requireActivity(),R.id.fragment);
+            controller = Navigation.findNavController(requireActivity(),R.id.fragment);
             controller.navigate(R.id.action_chooseFragment_to_cityFragment);
         });
     }

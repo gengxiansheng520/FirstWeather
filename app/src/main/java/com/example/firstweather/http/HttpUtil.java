@@ -3,11 +3,14 @@ package com.example.firstweather.http;
 
 import com.example.firstweather.db.model.City;
 import com.example.firstweather.db.model.County;
+import com.example.firstweather.db.model.HeWeather;
 import com.example.firstweather.db.model.Province;
 
 import java.util.List;
 
 import io.reactivex.Observable;
+import okhttp3.ResponseBody;
+import retrofit2.http.Query;
 
 public class HttpUtil {
     private Http http;
@@ -24,5 +27,11 @@ public class HttpUtil {
     }
     public Observable<List<County>> getCounty(String province_id, String city_id) {
         return http.getCounty(province_id, city_id);
+    }
+    public Observable<HeWeather> getWeather(String weatherId) {
+        return http.getWeather(weatherId);
+    }
+    public Observable<ResponseBody> getPic(String url) {
+        return http.getPic(url);
     }
 }

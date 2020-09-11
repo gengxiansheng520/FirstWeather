@@ -9,6 +9,8 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+//import androidx.navigation.NavController;
+//import androidx.navigation.Navigation;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.DividerItemDecoration;
@@ -40,6 +42,7 @@ public class CityFragment extends Fragment {
     private ChooseViewModel chooseViewModel;
     private CityAdapter cityAdapter;
     private CompositeDisposable compositeDisposable;
+    private NavController controller;
     private static final String TAG = "CityFragment";
 
     @Override
@@ -65,17 +68,15 @@ public class CityFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-
+        controller = Navigation.findNavController(requireActivity(),R.id.fragment);
         binding.backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                NavController controller = Navigation.findNavController(requireActivity(),R.id.fragment);
                 controller.navigate(R.id.chooseFragment);
             }
         });
         cityAdapter.setOnItemClick(city -> {
             chooseViewModel.setCity(city);
-            NavController controller = Navigation.findNavController(requireActivity(),R.id.fragment);
             controller.navigate(R.id.action_cityFragment_to_countyFragment);
         });
     }
