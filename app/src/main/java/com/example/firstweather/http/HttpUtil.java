@@ -10,7 +10,6 @@ import java.util.List;
 
 import io.reactivex.Observable;
 import okhttp3.ResponseBody;
-import retrofit2.http.Query;
 
 public class HttpUtil {
     private Http http;
