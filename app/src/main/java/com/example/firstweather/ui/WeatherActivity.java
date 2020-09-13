@@ -94,6 +94,9 @@ public class WeatherActivity extends AppCompatActivity {
                     HeWeather heWeather = s;
                     if (heWeather.weatherList != null) {
                         Weather weather = heWeather.weatherList.get(0);
+                        Gson gson = new Gson();
+                        String weatherString = gson.toJson(weather);
+                        App.saveWeather(weatherString);
                         showWeather(weather);
                     }
                 });
