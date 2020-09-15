@@ -4,7 +4,9 @@ import android.app.Application;
 import android.content.Context;
 
 import com.example.firstweather.db.Repository;
+import com.example.firstweather.db.model.County;
 import com.example.firstweather.db.shp.SHPUtil;
+import com.google.gson.Gson;
 
 public class App extends Application {
     private static Context context;
@@ -27,14 +29,22 @@ public class App extends Application {
     public static void saveWeatherId(String weatherId) {
         shpUtil.saveWeatherId(weatherId);
     }
+    public static void saveCounty(County county) {
+        Gson gson = new Gson();
+        String countyString = gson.toJson(county);
+        shpUtil.saveCounty(countyString);
+    }
+
     public static String getPic() {
         return shpUtil.getPic();
     }
     public static String getWeatherId() {
         return shpUtil.getWeatherId();
     }
-    public static String getWeather() {
-        return shpUtil.getWeather();
+    public static String getWeather() { return shpUtil.getWeather(); }
+    public static County getCounty() {
+        Gson gson = new Gson();
+       return gson.fromJson(shpUtil.getCounty(),County.class);
     }
     public static Context getContext() {
         return  context;

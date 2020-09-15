@@ -16,6 +16,9 @@ public class SHPUtil {
     public void saveWeatherId(String weatherId) {
         shp.saveShpString("weatherId",weatherId);
     }
+    public void saveCounty(String county) {
+        shp.saveShpString("county",county);
+    }
     public void saveWeather(String weather) {
         shp.saveShpString("weather",weather);
     }
@@ -27,6 +30,9 @@ public class SHPUtil {
     }
     public String getWeather() {
         return shp.getShpString("weather");
+    }
+    public String getCounty() {
+        return shp.getShpString("county");
     }
 
 

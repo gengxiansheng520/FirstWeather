@@ -27,6 +27,7 @@ import com.example.firstweather.db.model.County;
 import com.example.firstweather.db.model.Forecast;
 import com.example.firstweather.db.model.HeWeather;
 import com.example.firstweather.db.model.Weather;
+import com.example.firstweather.db.shp.SHPUtil;
 import com.example.firstweather.ui.chooseProvince.ChooseViewModel;
 import com.google.gson.Gson;
 
@@ -72,7 +73,6 @@ public class WeatherActivity extends AppCompatActivity {
         } else {
             Intent intent = getIntent();
             County county = intent.getParcelableExtra("county");
-            chooseViewModel.setCounty(county);
             requestWeather(county);
         }
         binding.title.navButton.setOnClickListener(view -> {
@@ -81,13 +81,14 @@ public class WeatherActivity extends AppCompatActivity {
         binding.swipeRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                County county1 = chooseViewModel.getCounty();
-                requestWeather(county1);
+                requestWeather(App.getCounty());
             }
         });
     }
 
     public void requestWeather(County county) {
+        App.saveCounty(county);
+        chooseViewModel.setCounty(county);
         binding.weatherLayout.setVisibility(View.INVISIBLE);
         Disposable disposable = chooseViewModel.getWeather(county.getWeather_id()).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
                 .subscribe(s->{
@@ -100,6 +101,7 @@ public class WeatherActivity extends AppCompatActivity {
                         showWeather(weather);
                     }
                 });
+        binding.swipeRefresh.setRefreshing(false);
         compositeDisposable.add(disposable);
     }
     void showWeather(Weather weather) {
@@ -125,7 +127,6 @@ public class WeatherActivity extends AppCompatActivity {
         binding.suggestion.sportText.setText(weather.suggestion.sport.txt);
         
         binding.weatherLayout.setVisibility(View.VISIBLE);
-        binding.swipeRefresh.setRefreshing(false);
     }
     void loadPic() {
         //http://guolin.tech/api/bing_pic
