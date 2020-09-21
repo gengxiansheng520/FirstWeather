@@ -8,7 +8,7 @@ public class Shp {
     private static Shp INSTANCE;
     private SharedPreferences sharedPreferences;
 
-    public static Shp getINSTANCE(Context context) {
+    public synchronized static Shp getINSTANCE(Context context) {
         if (INSTANCE == null) {
             INSTANCE = new Shp(context);
         }
